@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="channelSchedule"
+            type="com.example.tvschedule.data.models.ChannelSchedule" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:minHeight="70dp"
+        app:cardCornerRadius="4dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/channel_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:text="@{channelSchedule.component1()}"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toTopOf="@id/channel_id"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_constraintWidth_percent="0.25"
+                tools:text="MSNBC" />
+
+            <TextView
+                android:id="@+id/channel_id"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:text='@{channelSchedule.component2().get(0).show.network.id != null ? channelSchedule.component2().get(0).show.network.id : channelSchedule.component2().get(0).show.webChannel.id}'
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/channel_name"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_constraintWidth_percent="0.25"
+                tools:text="201" />
+
+            <TextView
+                android:id="@+id/current_episode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:text='@{channelSchedule.component2().size() > 0 ? @string/episode_format(channelSchedule.component2().get(0).airTime,channelSchedule.component2().get(0).show.name) : "no shows at the time"}'
+                android:textAlignment="viewStart"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/channel_name"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.75"
+                tools:text="13:00 | How I met your mother" />
+
+            <TextView
+                android:id="@+id/next_episode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="4dp"
+                android:layout_marginStart="4dp"
+                android:text='@{channelSchedule.component2().size() > 1 ? @string/episode_format(channelSchedule.component2().get(1).airTime,channelSchedule.component2().get(1).show.name) : ""}'
+                android:textAlignment="viewStart"
+                app:layout_constraintStart_toEndOf="@id/channel_name"
+                app:layout_constraintTop_toBottomOf="@id/current_episode"
+                app:layout_constraintWidth_percent="0.75"
+                tools:text="14:00 | Friends" />
+
+            <TextView
+                android:id="@+id/subsequent_episode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:text='@{channelSchedule.component2().size() > 2 ? @string/episode_format(channelSchedule.component2().get(2).airTime,channelSchedule.component2().get(2).show.name) : ""}'
+                android:textAlignment="viewStart"
+                app:layout_constraintStart_toEndOf="@id/channel_name"
+                app:layout_constraintTop_toBottomOf="@id/next_episode"
+                app:layout_constraintWidth_percent="0.75"
+                tools:text="15:00 | Game of thrones" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>
