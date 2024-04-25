@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">TV Schedule</string>
+    <string name="episode_format">%1$s | %2$s</string>
+    <string name="hour_format">%d:00</string>
+    <string name="show_info_title">Show Info</string>
+    <string name="network_label">Network:  </string>
+    <string name="schedule_label">Schedule:</string>
+    <string name="status_label">Status:</string>
+    <string name="type_label">Show type:</string>
+    <string name="premiered_label">Premiered:</string>
+    <string name="official_site_label">Official site:</string>
 </resources>

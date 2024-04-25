@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isProgressBarVisible"
+            type="Boolean" />
+
+        <variable
+            name="show"
+            type="com.example.tvschedule.data.models.Show" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="@{isProgressBarVisible ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+            <ImageView
+                android:id="@+id/show_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar"
+                tools:src="@drawable/showimage" />
+
+            <TextView
+                android:id="@+id/summary_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:layout_constraintTop_toBottomOf="@id/show_image_view" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/show_info_cardview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:backgroundTint="@color/cardview_light_background"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/summary_text_view">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/show_info_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/show_info_title"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/network_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/network_label"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/show_info_title" />
+
+                    <TextView
+                        android:id="@+id/network_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text='@{show.network.name != null ? show.network.name : show.webChannel.name}'
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toEndOf="@id/network_label"
+                        app:layout_constraintTop_toBottomOf="@id/show_info_title" />
+
+                    <TextView
+                        android:id="@+id/schedule_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/schedule_label"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/network_label" />
+
+                    <TextView
+                        android:id="@+id/schedule_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="@{show.schedule.time}"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toEndOf="@id/schedule_label"
+                        app:layout_constraintTop_toBottomOf="@id/network_label" />
+
+                    <TextView
+                        android:id="@+id/status_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/status_label"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/schedule_label" />
+
+                    <TextView
+                        android:id="@+id/status_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="@{show.status}"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toEndOf="@id/status_label"
+                        app:layout_constraintTop_toBottomOf="@id/schedule_label" />
+
+                    <TextView
+                        android:id="@+id/type_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/type_label"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/status_label" />
+
+                    <TextView
+                        android:id="@+id/type_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="@{show.type}"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toEndOf="@id/type_label"
+                        app:layout_constraintTop_toBottomOf="@id/status_label" />
+
+                    <TextView
+                        android:id="@+id/premiered_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/premiered_label"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/type_label" />
+
+                    <TextView
+                        android:id="@+id/premiered_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="@{show.premiered}"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toEndOf="@id/premiered_label"
+                        app:layout_constraintTop_toBottomOf="@id/type_label" />
+
+                    <TextView
+                        android:id="@+id/site_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/official_site_label"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/premiered_label" />
+
+                    <TextView
+                        android:id="@+id/site_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="@{show.officialSite}"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toEndOf="@id/site_label"
+                        app:layout_constraintTop_toBottomOf="@id/premiered_label" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
